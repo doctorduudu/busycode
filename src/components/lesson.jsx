@@ -12,11 +12,12 @@ class Lesson extends Component {
 
   componentDidMount() {
     const { currentLessonNo } = this.state;
+    console.log(currentLessonNo);
 
     firebase
       .firestore()
       .collection("lessons")
-      .where("lessonNo", "==", Number(currentLessonNo))
+      .where("lessonNo", "==", currentLessonNo)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -60,10 +61,10 @@ class Lesson extends Component {
           <div className="container">
             <div className="row">
               <div className="col">
-                <h5>
-                  Section {lesson.section}: {lesson.sectionTitle}
-                </h5>
+                <h5>Section {lesson.sectionNo}</h5>
               </div>
+            </div>
+            <div className="row">
               <div className="col">
                 <h5>
                   Lesson {lesson.lessonNo}: {lesson.lessonTitle}

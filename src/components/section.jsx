@@ -35,7 +35,7 @@ class Section extends Component {
     const getLessons = firebase
       .firestore()
       .collection("lessons")
-      .where("section", "==", sectionNo)
+      .where("sectionNo", "==", sectionNo)
       .orderBy("lessonNo", "asc")
       .get()
       .then((querySnapshot) => {
@@ -72,7 +72,7 @@ class Section extends Component {
 
         {lessons.map((lesson) => (
           <ExpansionPanelDetails key={lesson.lessonNo}>
-            <Link to={`/lesson/${sectionTitle}/${lesson.lessonNo}`}>
+            <Link to={`/lesson/${lesson.lessonNo}`}>
               {lesson.lessonNo}. {lesson.lessonTitle}
             </Link>
           </ExpansionPanelDetails>

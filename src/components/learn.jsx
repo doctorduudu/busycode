@@ -60,8 +60,9 @@ class Learn extends Component {
               <div className={classes.root}>
                 <Section
                   sectionTitle="Introduction to Programming and HTML"
-                  sectionNo={"1"}
+                  sectionNo="1"
                 />
+                <Section sectionTitle="Introduction to CSS" sectionNo="2" />
               </div>
             </div>
           </div>
