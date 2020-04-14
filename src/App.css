@@ -1,5 +1,13 @@
+:root {
+  --Primary: #e68a00;
+  --Secondary: #4747d1;
+  --lightGrey: #e9e5e5bd;
+  --darkGrey: #cfcbcbbd;
+}
+
 .App {
   text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .App-logo {
@@ -35,4 +43,207 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+nav {
+  background-color: var(--Primary);
+  height: 60px;
+}
+
+nav #navbar-brand {
+  float: left;
+  margin: 15px 10px;
+}
+
+nav #navlinks {
+  float: right;
+  margin-top: 10px;
+}
+
+nav #navlinks li {
+  display: inline;
+  margin: 0px 0px;
+}
+/* 
+nav #logo {
+  height: 200px;
+  width: 200px;
+} */
+
+a {
+  text-decoration: none !important;
+  font-weight: 700;
+}
+
+nav #navbar-brand a {
+  color: var(--Primary);
+  background-color: #ffffff;
+  padding: 5px 20px;
+  border-top: 5px solid var(--Secondary);
+  border-bottom: 5px solid var(--Secondary);
+}
+
+nav #navlinks a {
+  color: #ffffff;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav #navlinks a:hover {
+  background-color: #ffffff;
+  color: var(--Primary);
+  transition: ease 0.7s;
+}
+
+#jumbo {
+  color: #ffffff;
+  height: 300px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("./img/header-bg.jpg") center center;
+  background-attachment: fixed;
+  text-align: center;
+  padding-top: 60px;
+}
+
+#jumbo h1 {
+  text-transform: capitalize;
+}
+
+#jumbo p {
+  font-size: 20px;
+  margin: 0;
+}
+
+#techs {
+  background-color: var(--lightGrey);
+}
+
+#techs .container .row,
+#skills .container .row,
+#customer-review .container .row {
+  display: flex;
+  justify-content: space-around;
+}
+
+#techs img {
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+}
+
+#skills {
+  background-color: var(--darkGrey);
+  padding-top: 20px;
+}
+
+#skills .col-6 p {
+  font-size: 15px;
+  color: #ffffff;
+  background-color: var(--Primary);
+  border-left: 6px solid var(--Secondary);
+  border-radius: 10px 0 10px 0;
+  font-weight: bolder;
+  padding: 5px;
+  height: 50px;
+}
+
+#customer-review {
+  background-color: var(--lightGrey);
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#customer-review .review {
+  height: 200px;
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 50px 5px;
+  text-align: center;
+  position: relative;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+#customer-review img {
+  height: 100px;
+  width: 100px;
+  border: 1px solid var(--lightGrey);
+  border-radius: 50%;
+  position: relative;
+  top: -50px;
+  margin-bottom: -30px;
+}
+
+#customer-review p {
+  font-size: 13px;
+  padding: 0 2px;
+}
+
+#customer-review h5 {
+  margin-top: -10px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.title .col span {
+  border-bottom: 3px solid var(--Secondary);
+  font-size: 28px;
+  font-weight: 500;
+  padding-bottom: 3px;
+}
+
+#intro p {
+  text-indent: 0.5in;
+  text-align: justify;
+}
+
+@media only screen and (max-width: 650px) {
+  #jumbo p {
+    font-size: 17px;
+  }
+  nav {
+    height: 80px;
+    text-align: center;
+  }
+
+  nav #navbar-brand {
+    float: none;
+    margin: 15px auto;
+  }
+
+  nav #navlinks {
+    float: none;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  nav #navlinks li {
+    margin: 0px 5px !important;
+  }
+}
+
+#lesson {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#lesson .iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  margin-bottom: 20px;
+}
+
+#lesson .iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
