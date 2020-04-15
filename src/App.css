@@ -247,3 +247,31 @@ nav #navlinks a:hover {
   width: 100%;
   height: 100%;
 }
+
+#blogBodyUpload .container .col-lg-9,
+#blogUpload .container .col-lg-9 {
+  margin: 0 auto;
+}
+
+#blogBodyUpload .body-btns .col {
+  display: flex;
+  justify-content: space-between;
+}
+
+#blogBodyUpload .body-btns .body-btn {
+  margin: 5px;
+}
+
+#blogBodyUpload .finish-btn .col {
+  display: flex;
+  justify-content: space-around;
+}
+
+#blogBodyUpload #finish-btn {
+  font-size: 18px;
+  color: #ffffff;
+  background-color: green;
+  position: fixed;
+  bottom: 50px;
+  width: 88%;
+}

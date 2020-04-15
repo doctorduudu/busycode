@@ -1,15 +1,10 @@
 import React, { Component } from "react";
 import Form from "./common/form";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import TextInputField from "../components/common/textInputField";
 import * as firebase from "firebase/app";
 import Joi from "joi-browser";
+import Title from "./common/title";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -108,34 +103,51 @@ class BlogUpload extends Form {
           const createPostBtn = document.getElementById("submit-btn");
           const continueBtn = document.getElementById("continue-btn");
 
-          firebase
-            .firestore()
-            .collection("posts")
-            .add({
+          // firebase
+          //   .firestore()
+          //   .collection("posts")
+          //   .add({
+          //     type: type,
+          //     title: title,
+          //     imgUrl: downloadURL,
+          //     dateUploaded: dateUploaded,
+          //     body: [],
+          //   })
+          //   .then((docRef) => {
+          //     console.log("post created");
+          //   })
+          //   .catch((error) => {
+          //     console.log(error.message);
+          //   });
+
+          this.setState({
+            data: {
+              type: "",
+              title: "",
+              featuredImg: "",
+            },
+          });
+
+          localStorage.setItem(
+            "currentPost",
+            JSON.stringify({
               type: type,
               title: title,
               imgUrl: downloadURL,
               dateUploaded: dateUploaded,
+              body: [],
             })
-            .then((docRef) => {
-              console.log("post created");
-              createPostBtn.style.display = "none";
-              continueBtn.style.display = "block";
-
-              this.setState({
-                data: {
-                  type: "",
-                  title: "",
-                  featuredImg: "",
-                },
-              });
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
+          );
+          createPostBtn.style.display = "none";
+          continueBtn.style.display = "block";
         });
       }
     );
+  };
+
+  gotoAddBody = () => {
+    console.log("go to add post body clicked");
+    window.location.assign("/blog-body-upload");
   };
 
   render() {
@@ -145,6 +157,7 @@ class BlogUpload extends Form {
       <React.Fragment>
         <section id="blogUpload">
           <div className="container post-details">
+            <Title title="Create Post" />
             <div className="row">
               <div className="col col-lg-9">
                 {!showAddBody && (
@@ -166,18 +179,18 @@ class BlogUpload extends Form {
                     {this.renderSubmitButton("Create Post")}
                   </form>
                 )}
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  id="continue-btn"
+                  style={{ display: "none" }}
+                  onClick={this.gotoAddBody}
+                >
+                  Continue to add Post Body
+                </Button>
               </div>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                id="continue-btn"
-                style={{ display: "none" }}
-                onClick={this.gotoAddBody}
-              >
-                Continue to add Post Body
-              </Button>
             </div>
           </div>
         </section>

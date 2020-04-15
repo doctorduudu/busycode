@@ -8,6 +8,8 @@ import Lesson from "./components/lesson";
 import LessonUpload from "./components/lessonUpload";
 import Blog from "./components/blog";
 import BlogUpload from "./components/blogUpload";
+import BlogBodyUpload from "./components/blogBodyUpload";
+import PostPreview from "./components/postPreview";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/lesson-upload" exact component={LessonUpload} />
         <Route path="/blog" exact component={Blog} />
         <Route path="/blog-upload" exact component={BlogUpload} />
+        <Route path="/blog-body-upload" exact component={BlogBodyUpload} />
+        <Route path="/post-preview" exact component={PostPreview} />
 
         <Redirect from="/" exact to="/home" />
       </Switch>
