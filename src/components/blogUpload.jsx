@@ -41,22 +41,12 @@ class BlogUpload extends Form {
     errors: {},
     file: {},
     showAddBody: false,
-    body: {
-      text: "",
-      Img: "",
-    },
-    bodyerrors: {},
   };
 
   schema = {
     type: Joi.string().required().label("Post Type"),
-    title: Joi.string().min(5).max(200).required().label("Post Title"),
+    title: Joi.string().min(5).required().label("Post Title"),
     featuredImg: Joi.string().required().label("Featured Image"),
-  };
-
-  bodySchema = {
-    text: Joi.string().min(20).label("Body Text"),
-    Img: Joi.string().label("Body Image"),
   };
 
   renderPostTypes = () => {
@@ -79,9 +69,7 @@ class BlogUpload extends Form {
     const title = data.title;
 
     const date = new Date();
-    const dateUploaded = `${date.getDate()} - ${
-      date.getMonth() + 1
-    } - ${date.getFullYear()}`;
+    const dateUploaded = date.toDateString();
     console.log(dateUploaded);
 
     const file = this.state.file;
@@ -135,7 +123,7 @@ class BlogUpload extends Form {
               title: title,
               imgUrl: downloadURL,
               dateUploaded: dateUploaded,
-              body: [],
+              body: "",
             })
           );
           createPostBtn.style.display = "none";

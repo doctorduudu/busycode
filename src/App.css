@@ -121,7 +121,8 @@ nav #navlinks a:hover {
 
 #techs .container .row,
 #skills .container .row,
-#customer-review .container .row {
+#customer-review .container .row,
+#post-preview .container .row {
   display: flex;
   justify-content: space-around;
 }
@@ -249,7 +250,8 @@ nav #navlinks a:hover {
 }
 
 #blogBodyUpload .container .col-lg-9,
-#blogUpload .container .col-lg-9 {
+#blogUpload .container .col-lg-9,
+#post-preview .container .col-lg-9 {
   margin: 0 auto;
 }
 
@@ -272,6 +274,45 @@ nav #navlinks a:hover {
   color: #ffffff;
   background-color: green;
   position: fixed;
-  bottom: 50px;
+  bottom: 20px;
   width: 88%;
+}
+
+#post-preview .try-post {
+  color: red;
+}
+
+#post-preview .post-title {
+  text-align: center;
+  /* font-size: 25px; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+#post-preview .col-lg-9 {
+  text-align: center;
+}
+
+#post-preview .post-text {
+  text-align: left;
+}
+
+#post-preview img {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+}
+
+#post-preview button.return {
+  margin-bottom: 20px;
+}
+
+#post-preview colorRed {
+  color: red;
+}
+
+#blogBodyUpload .img-urls {
+  color: blue;
+  height: 280px;
+  overflow-y: scroll;
 }

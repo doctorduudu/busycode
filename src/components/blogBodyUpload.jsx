@@ -45,6 +45,7 @@ class BlogBodyUpload extends Form {
     textErrors: {},
     showAddText: false,
     showAddImg: false,
+    imgUrls: [],
   };
 
   schema = {
@@ -54,6 +55,11 @@ class BlogBodyUpload extends Form {
   textSchema = {
     text: Joi.string().min(20).required().label("Body Text"),
   };
+
+  componentDidMount() {
+    const imgUrls = JSON.parse(localStorage.getItem("currentImgUrls")) || [];
+    this.setState({ imgUrls });
+  }
 
   validateAddText = () => {
     const options = { abortEarly: false };
@@ -148,6 +154,7 @@ class BlogBodyUpload extends Form {
   };
 
   doSubmit = () => {
+    const { imgUrls } = this.state;
     console.log("image submitted");
     const file = this.state.file;
 
@@ -170,12 +177,10 @@ class BlogBodyUpload extends Form {
         task.snapshot.ref.getDownloadURL().then((downloadURL) => {
           console.log("File available at", downloadURL);
 
-          currentPost.body.push({
-            type: "img",
-            value: downloadURL,
-          });
+          imgUrls.push(downloadURL);
           localStorage.setItem("currentPost", JSON.stringify(currentPost));
-          this.setState({ data: { bodyImg: "" } });
+          localStorage.setItem("currentImgUrls", JSON.stringify(imgUrls));
+          this.setState({ data: { bodyImg: "" }, imgUrls });
           console.log(JSON.parse(localStorage.getItem("currentPost")));
         });
       }
@@ -190,10 +195,7 @@ class BlogBodyUpload extends Form {
 
     const currentPost = JSON.parse(localStorage.getItem("currentPost"));
     console.log(currentPost);
-    currentPost.body.push({
-      type: "text",
-      value: text,
-    });
+    currentPost.body = text;
 
     localStorage.setItem("currentPost", JSON.stringify(currentPost));
     this.setState({ textData: { text: "" } });
@@ -203,6 +205,7 @@ class BlogBodyUpload extends Form {
   goToFinish = () => {
     console.log("submitting the final post");
     const finalPost = JSON.parse(localStorage.getItem("currentPost"));
+    localStorage.setItem("currentImgUrls", "[]");
 
     firebase
       .firestore()
@@ -222,7 +225,7 @@ class BlogBodyUpload extends Form {
 
   render() {
     const classes = useStyles;
-    const { showAddImg, showAddText } = this.state;
+    const { showAddImg, showAddText, imgUrls } = this.state;
     return (
       <React.Fragment>
         <section id="blogBodyUpload">
@@ -280,6 +283,17 @@ class BlogBodyUpload extends Form {
                     {this.renderAddTextSubmitButton("Submit Text")}
                   </form>
                 )}
+              </div>
+            </div>
+            <div className="row img-urls">
+              <div className="col col-lg-9">
+                {imgUrls.map((url) => {
+                  return (
+                    <p key={url}>
+                      <strong>Image Url:</strong> {url}
+                    </p>
+                  );
+                })}
               </div>
             </div>
             <div className="row finish-btn">
