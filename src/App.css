@@ -1,48 +1,51 @@
 :root {
   --Primary: #e68a00;
   --Secondary: #4747d1;
-  --lightGrey: #e9e5e5bd;
-  --darkGrey: #cfcbcbbd;
+  --lightGrey: #f7f1f1bd;
+  --darkGrey: #e0dedebd;
 }
 
-.App {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
+.pre-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: -webkit-translate(-50%, -50%);
+  transform: -moz-translate(-50%, -50%);
+  transform: -ms-translate(-50%, -50%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* Keeping the footer where it belongs */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.over-all-container {
+  position: relative;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.content-wrapper {
+  padding-bottom: 150px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 150px;
+  width: 100%;
+  padding: 20px 10px;
+  background-color: var(--Primary);
+  margin-top: 50px;
+}
+
+footer .col-6 {
+  margin-top: 10px;
+}
+
+footer .col-6 a {
+  color: #ffffff;
+}
+
+body {
+  height: 100%;
 }
 
 nav {
@@ -90,10 +93,23 @@ nav #navlinks a {
   border-radius: 5px;
 }
 
-nav #navlinks a:hover {
+nav #navlinks span {
+  color: #ffffff;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+nav #navlinks a:hover,
+nav #navlinks span:hover {
   background-color: #ffffff;
   color: var(--Primary);
   transition: ease 0.7s;
+}
+
+nav .sign-out-btn:hover {
+  cursor: pointer;
 }
 
 #jumbo {
@@ -101,7 +117,7 @@ nav #navlinks a:hover {
   height: 300px;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("./img/header-bg.jpg") center center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   text-align: center;
   padding-top: 60px;
 }
@@ -119,6 +135,10 @@ nav #navlinks a:hover {
   background-color: var(--lightGrey);
 }
 
+#techs .container .row {
+  margin: 0 auto;
+}
+
 #techs .container .row,
 #skills .container .row,
 #customer-review .container .row,
@@ -130,7 +150,10 @@ nav #navlinks a:hover {
 #techs img {
   height: 100px;
   width: 100px;
-  padding: 10px;
+  padding: 15px;
+  border: 1px solid var(--darkGrey);
+  margin: 8px;
+  border-radius: 50%;
 }
 
 #skills {
@@ -138,7 +161,7 @@ nav #navlinks a:hover {
   padding-top: 20px;
 }
 
-#skills .col-6 p {
+#skills .col-5 {
   font-size: 15px;
   color: #ffffff;
   background-color: var(--Primary);
@@ -147,6 +170,8 @@ nav #navlinks a:hover {
   font-weight: bolder;
   padding: 5px;
   height: 50px;
+  margin: 10px;
+  line-height: 15px;
 }
 
 #customer-review {
@@ -201,31 +226,6 @@ nav #navlinks a:hover {
 #intro p {
   text-indent: 0.5in;
   text-align: justify;
-}
-
-@media only screen and (max-width: 650px) {
-  #jumbo p {
-    font-size: 17px;
-  }
-  nav {
-    height: 80px;
-    text-align: center;
-  }
-
-  nav #navbar-brand {
-    float: none;
-    margin: 15px auto;
-  }
-
-  nav #navlinks {
-    float: none;
-    margin-top: 10px;
-    padding: 0;
-  }
-
-  nav #navlinks li {
-    margin: 0px 5px !important;
-  }
 }
 
 #lesson {
@@ -315,4 +315,47 @@ nav #navlinks a:hover {
   color: blue;
   height: 280px;
   overflow-y: scroll;
+}
+
+.post-row {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 60px;
+  border-bottom: 1px solid lightgray;
+  margin: 0 auto;
+}
+
+#card-btn {
+  background-color: var(--Primary);
+  color: #ffffff;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 650px) {
+  #jumbo p {
+    font-size: 17px;
+  }
+  nav {
+    height: 80px;
+    text-align: center;
+  }
+
+  nav #navbar-brand {
+    float: none;
+    margin: 15px auto;
+  }
+
+  nav #navlinks {
+    float: none;
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  nav #navlinks li {
+    margin: 0px 5px !important;
+  }
+
+  #skills .col-5 {
+    font-size: 13px;
+  }
 }

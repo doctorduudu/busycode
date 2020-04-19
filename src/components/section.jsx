@@ -28,7 +28,7 @@ class Section extends Component {
   componentDidMount() {
     const { sectionNo, sectionTitle } = this.props;
     this.setState({ sectionNo, sectionTitle });
-    console.log(sectionNo);
+    // console.log(sectionNo);
 
     let lessons = [];
 
@@ -41,12 +41,12 @@ class Section extends Component {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const lesson = doc.data();
-          console.log(lesson);
+          // console.log(lesson);
           lessons.push(lesson);
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
     Promise.all([getLessons]).then(() => {
       this.setState({ lessons });
@@ -56,7 +56,6 @@ class Section extends Component {
   render() {
     const classes = useStyles;
     const { sectionNo, sectionTitle, lessons } = this.state;
-    console.log(this.state.lessons[1]);
 
     return (
       <ExpansionPanel>
@@ -65,15 +64,19 @@ class Section extends Component {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.heading}>
+          <Typography className={classes.heading} style={{ fontSize: "15px" }}>
             Section {sectionNo}: {sectionTitle}
           </Typography>
         </ExpansionPanelSummary>
 
         {lessons.map((lesson) => (
           <ExpansionPanelDetails key={lesson.lessonNo}>
-            <Link to={`/lesson/${lesson.lessonNo}`}>
-              {lesson.lessonNo}. {lesson.lessonTitle}
+            <Link
+              to={`/lesson/${lesson.lessonNo}`}
+              style={{ fontSize: "13px", width: "100%" }}
+            >
+              {lesson.lessonNo}. {lesson.lessonTitle}{" "}
+              <span style={{ color: "grey" }}>- {lesson.length}mins</span>
             </Link>
           </ExpansionPanelDetails>
         ))}

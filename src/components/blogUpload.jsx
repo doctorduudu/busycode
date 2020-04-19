@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./common/form";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import * as firebase from "firebase/app";
 import Joi from "joi-browser";
 import Title from "./common/title";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -37,6 +38,7 @@ class BlogUpload extends Form {
       type: "",
       title: "",
       featuredImg: "",
+      previewStory: "",
     },
     errors: {},
     file: {},
@@ -47,6 +49,11 @@ class BlogUpload extends Form {
     type: Joi.string().required().label("Post Type"),
     title: Joi.string().min(5).required().label("Post Title"),
     featuredImg: Joi.string().required().label("Featured Image"),
+    previewStory: Joi.string()
+      .min(20)
+      .max(100)
+      .required()
+      .label("Preview Story"),
   };
 
   renderPostTypes = () => {
@@ -67,10 +74,11 @@ class BlogUpload extends Form {
 
     const type = data.type;
     const title = data.title;
+    const previewStory = data.previewStory;
 
     const date = new Date();
+    const id = Date.now();
     const dateUploaded = date.toDateString();
-    console.log(dateUploaded);
 
     const file = this.state.file;
 
@@ -86,7 +94,10 @@ class BlogUpload extends Form {
       },
       () => {
         task.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log("FIle available at ", downloadURL);
+          // console.log("FIle available at ", downloadURL);
+          toast.success(
+            "successfully created post. Click Continue to add the post body"
+          );
 
           const createPostBtn = document.getElementById("submit-btn");
           const continueBtn = document.getElementById("continue-btn");
@@ -113,6 +124,7 @@ class BlogUpload extends Form {
               type: "",
               title: "",
               featuredImg: "",
+              previewStory: "",
             },
           });
 
@@ -121,9 +133,11 @@ class BlogUpload extends Form {
             JSON.stringify({
               type: type,
               title: title,
-              imgUrl: downloadURL,
+              featuredImg: downloadURL,
               dateUploaded: dateUploaded,
+              id: date,
               body: "",
+              previewStory: previewStory,
             })
           );
           createPostBtn.style.display = "none";
@@ -156,6 +170,7 @@ class BlogUpload extends Form {
                       this.renderPostTypes()
                     )}
                     {this.renderTextField("title", "Title")}
+                    {this.renderTextField("previewStory", "Preview Story")}
                     <h5 style={{ margin: "20px" }}>
                       <strong>Featured Image</strong>
                     </h5>

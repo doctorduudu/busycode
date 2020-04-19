@@ -40,8 +40,8 @@ class PostPreview extends Component {
                 <h2 className="post-title">{post.title}</h2>
                 <img
                   className="img img-fluid featured-img"
-                  src={post.imgUrl}
-                  alt="featured image"
+                  src={post.featuredImg}
+                  alt="featured"
                 ></img>
 
                 {/* {postBody.map((body) => {

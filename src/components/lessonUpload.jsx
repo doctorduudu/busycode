@@ -1,16 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import { toast } from "react-toastify";
 import * as firebase from "firebase/app";
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 class LessonUpload extends Form {
   state = {
     data: {
-      sectionNo: "",
+      sectionNo: 0,
       lessonNo: 0,
       lessonTitle: "",
       length: 0,
@@ -67,32 +61,60 @@ class LessonUpload extends Form {
     return [
       { name: "1. Introduction to Programming and HTML", id: "1" },
       { name: "2. Introduction to CSS", id: "2" },
+      { name: "3. Project: Simple Website for Ideas Farms ltd", id: "3" },
+      // { name: "4. Project: Simple Website for Ideas Farms ltd", id: "4" },
+      // { name: "5. Project: Simple Website for Ideas Farms ltd", id: "5" },
+      // { name: "6. Project: Simple Website for Ideas Farms ltd", id: "6" },
+      // { name: "7. Project: Simple Website for Ideas Farms ltd", id: "7" },
+      // { name: "8. Project: Simple Website for Ideas Farms ltd", id: "8" },
+      // { name: "9. Project: Simple Website for Ideas Farms ltd", id: "9" },
     ];
   };
 
   doSubmit = () => {
     const { data } = this.state;
 
-    const sectionNo = data.sectionNo;
-    const lessonNo = data.lessonNo;
+    const sectionNo = Number(data.sectionNo);
+    const lessonNo = Number(data.lessonNo);
     const lessonTitle = data.lessonTitle;
-    const length = data.length;
+    const length = Number(data.length);
     const url = data.url;
-    // let sectionTitle = "";
+    let sectionTitle = "";
 
-    // if (sectionNo == 1) {
-    //   sectionTitle = "Introduction to Programming and HTML";
-    // }
+    switch (sectionNo) {
+      case 1:
+        sectionTitle = "Introduction to Programming and HTML";
+        break;
+      case 2:
+        sectionTitle = "Introduction to CSS";
+        break;
+      case 3:
+        sectionTitle = "Project: Simple Website for Ideas Farms ltd";
+        break;
+      // case 4:
+      //   sectionTitle = "Introduction to CSS";
+      //   break;
+      // case 5:
+      //   sectionTitle = "Introduction to CSS";
+      //   break;
+      // case 6:
+      //   sectionTitle = "Introduction to CSS";
+      //   break;
+      // case 7:
+      //   sectionTitle = "Introduction to CSS";
+      //   break;
+      // case 8:
+      //   sectionTitle = "Introduction to CSS";
+      //   break;
+      // case 9:
+      //   sectionTitle = "Introduction to CSS";
+      //   break;
+      default:
+        console.log("an error occurred");
+        break;
+    }
 
-    // switch (sectionNo) {
-    //   case 1:
-    //     sectionTitle = "Introduction to Programming and HTML";
-    //     break;
-    //   default:
-    //     console.log("an error occurred");
-    // }
-
-    console.log(sectionNo, lessonNo, length, url);
+    console.log(sectionNo, lessonNo, length, url, sectionTitle);
 
     firebase
       .firestore()
@@ -103,24 +125,25 @@ class LessonUpload extends Form {
         lessonTitle: lessonTitle,
         length: length,
         url: url,
-        // sectionTitle: sectionTitle,
+        sectionTitle: sectionTitle,
       })
       .then((docRef) => {
-        console.log("successfully submitted");
+        // console.log("successfully submitted");
+        toast.success("Successfully added lesson");
 
         this.setState({
           data: {
-            sectionNo: "",
+            sectionNo: 0,
             lessonNo: 0,
             lessonTitle: "",
             length: 0,
             url: "",
-            // sectionTitle: "",
           },
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
+        toast.error(error.message);
         return;
       });
   };
@@ -131,6 +154,16 @@ class LessonUpload extends Form {
       <React.Fragment>
         <section id="lesson-upload">
           <div className="container">
+            <Button
+              component={Link}
+              to="/blog-upload"
+              fullWidth
+              color="primary"
+              variant="contained"
+              className="mt-2"
+            >
+              Upload Blog Post
+            </Button>
             <div className="row">
               <div
                 className="col"

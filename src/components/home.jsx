@@ -9,6 +9,8 @@ import GitLogo from "../img/git-logo.png";
 import GithubLogo from "../img/github-logo.png";
 import TerminalLogo from "../img/terminal-logo.jpg";
 import Customer from "../img/customer.jpg";
+import { Button } from "@material-ui/core";
+import Title from "./common/title";
 
 class Home extends Component {
   state = {};
@@ -92,9 +94,10 @@ class Home extends Component {
 
         <section id="skills">
           <div className="container">
+            <Title title="Expensive Skills Await" />
             <div className="row">
               <div className="col">
-                <p>
+                <p style={{ textAlign: "justify" }}>
                   This course is intended to introduce you to the basic concepts
                   of computer programming and software development.We will start
                   from the basics of programming all the way to building
@@ -111,23 +114,29 @@ class Home extends Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-6">
-                <p>Universal Programming Concepts</p>
+              <div className="col-5 shadow-lg">
+                Universal Programming Concepts
               </div>
-              <div className="col-6">
-                <p>Creating a Website</p>
+              <div className="col-5 shadow-lg">Creating a Website</div>
+              <div className="col-5 shadow-lg">Creating a web application</div>
+              <div className="col-5 shadow-lg">
+                Convertion of web app to Mobile app
               </div>
-              <div className="col-6">
-                <p>Creating a web application</p>
+              <div className="col-5 shadow-lg">Free web app hosting</div>
+              <div className="col-5 shadow-lg">
+                Database creation with less code
               </div>
-              <div className="col-6">
-                <p>Convertion of web app to Mobile app</p>
-              </div>
-              <div className="col-6">
-                <p>Free web app hosting</p>
-              </div>
-              <div className="col-6">
-                <p>Database creation with less code</p>
+            </div>
+            <div className="row">
+              <div className="col">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  style={{ marginBottom: "5px" }}
+                >
+                  Start Your Journey! click here
+                </Button>
               </div>
             </div>
           </div>
@@ -135,6 +144,7 @@ class Home extends Component {
 
         <section id="customer-review">
           <div className="container">
+            <Title title="From Grateful Students" />
             <div className="row">
               <div className="col-10 col-md-5 col-lg-5 review">
                 <img className="img img-fluid" src={Customer} alt="customer" />

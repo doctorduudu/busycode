@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "./common/form";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -6,6 +6,7 @@ import * as firebase from "firebase/app";
 import Joi from "joi-browser";
 import TextInputField from "./common/textInputField";
 import Title from "./common/title";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -175,13 +176,16 @@ class BlogBodyUpload extends Form {
       },
       () => {
         task.snapshot.ref.getDownloadURL().then((downloadURL) => {
-          console.log("File available at", downloadURL);
+          // console.log("File available at", downloadURL);
+          toast.success(
+            "image uploaded successfully. Please find image src below"
+          );
 
           imgUrls.push(downloadURL);
           localStorage.setItem("currentPost", JSON.stringify(currentPost));
           localStorage.setItem("currentImgUrls", JSON.stringify(imgUrls));
           this.setState({ data: { bodyImg: "" }, imgUrls });
-          console.log(JSON.parse(localStorage.getItem("currentPost")));
+          // console.log(JSON.parse(localStorage.getItem("currentPost")));
         });
       }
     );
@@ -212,10 +216,12 @@ class BlogBodyUpload extends Form {
       .collection("posts")
       .add(finalPost)
       .then((docRef) => {
-        console.log("successfully submitted final post");
+        // console.log("successfully submitted final post");
+        toast.success("successfully submitted post");
       })
       .catch((error) => {
         console.log(error.message);
+        toast.error(error.message);
       });
   };
 
@@ -290,7 +296,7 @@ class BlogBodyUpload extends Form {
                 {imgUrls.map((url) => {
                   return (
                     <p key={url}>
-                      <strong>Image Url:</strong> {url}
+                      <strong>Image src:</strong> {url}
                     </p>
                   );
                 })}

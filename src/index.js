@@ -5,7 +5,6 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import * as firebase from "firebase/app";
-import * as firebaseui from "firebaseui";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";

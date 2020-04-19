@@ -5,8 +5,12 @@ import * as firebaseui from "firebaseui";
 class SignIn extends Component {
   state = {};
   componentDidMount() {
+    const urlTo = this.props.match.params.urlTo;
+    const id = this.props.match.params.id;
+    console.log(urlTo, id);
+
     var uiConfig = {
-      signInSuccessUrl: "<url-to-redirect-to-on-success>",
+      signInSuccessUrl: id ? `/${urlTo}/${id}` : `/${urlTo}`,
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -16,10 +20,10 @@ class SignIn extends Component {
       // tosUrl and privacyPolicyUrl accept either url string or a callback
       // function.
       // Terms of service url/callback.
-      tosUrl: "<your-tos-url>",
+      tosUrl: "/terms-of-service",
       // Privacy policy url/callback.
       privacyPolicyUrl: function () {
-        window.location.assign("<your-privacy-policy-url>");
+        window.location.assign("/privacy-policy");
       },
     };
 

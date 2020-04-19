@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import * as firebase from "firebase/app";
+import SignIn from "./signIn";
+import { toast } from "react-toastify";
 // import { Link } from "react-router-dom";
 // import Logo from "../img/BC-logo.png";
 
 class NavBar extends Component {
-  state = {};
+  state = {
+    signedIn: false,
+    user: {},
+  };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ signedIn: true });
+        console.log(user);
+        this.setState({ signedIn: true, user });
         // ...
       } else {
         // User is signed out.
@@ -27,9 +33,10 @@ class NavBar extends Component {
       .then(
         function () {
           setTimeout(function () {
-            window.location = "/sign-in";
+            window.location = "/sign-in/home";
           }, 2000);
-          console.log("Signed Out");
+          // console.log("Signed Out");
+          toast.success("Successfully signed out. See you again soon");
         },
         function (error) {
           console.error("Sign Out Error", error);
@@ -38,6 +45,8 @@ class NavBar extends Component {
   };
 
   render() {
+    const { signedIn, user } = this.state;
+
     return (
       <div>
         <nav>
@@ -53,24 +62,24 @@ class NavBar extends Component {
               <li>
                 <a href="/blog">Blog</a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/faq">FAQ</a>
-              </li>
-              {!this.state.signedIn && (
+              </li> */}
+              {!signedIn && (
                 <li>
-                  <a href="/sign-in">Sign Up</a>
+                  <a href="/sign-in/home">Sign Up/In</a>
                 </li>
               )}
-              {this.state.signedIn && (
-                <li>
-                  <a href="/" onClick={this.signOutUser}>
-                    Sign Out
-                  </a>
+              {signedIn && (
+                <li className="sign-out-btn">
+                  <span onClick={this.signOutUser}>Sign Out</span>
                 </li>
               )}
-              <li>
-                <a href="/lesson-upload">Upload</a>
-              </li>
+              {SignIn && user.uid === "88nHhyFPsEbuROsCKGXAvaQpcxq1" && (
+                <li>
+                  <a href="/lesson-upload">Upload</a>
+                </li>
+              )}
             </ul>
           </div>
         </nav>
